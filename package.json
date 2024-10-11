@@ -4,7 +4,14 @@
   "description": "Codebase to use for BE devs",
   "main": "src/server.ts",
   "scripts": {
-    "test": "jest"
+    "build": "tsc -b ./tsconfig.json",
+    "build:clean": "rm -rf ./dist",
+    "dev": "npm run build:clean && npm run build && nodemon ./dist/server.js",
+    "dev:ts": "nodemon ./src/server.ts",
+    "start": "npm run build:clean && npm run build && node ./dist/server.js",
+    "test": "rm -rf ./dist/ && tsc -b ./tsconfig.json && jest",
+    "db:push": "npx prisma db push",
+    "db:migrate": "npx prisma db migrate dev --name user-entity --create-only && npx prisma generate"
   },
   "author": "lemodoescoding",
   "license": "ISC",
